@@ -1,0 +1,39 @@
+= Campfire Notifier
+
+Most of the time when I want to use the Campfire API, I just want to send it
+a simple message. So, I created a stupid simple way to send a message to 
+Campfire.
+
+I've include a command line tool as well to make it really easy to use this
+with low-ish level system tools (i.e. cron).
+
+== Install
+
+gem install campfire_notifier
+
+== Settings
+
+Put your campfire subdomain, the room id (not the name) to which you want to 
+send a message, and your API token, which you can find on your campfire user
+edit page.
+
+See here for more details: http://developer.37signals.com/campfire/index
+
+== Requirements
+
+Nothing! This baby uses gem bundler, so you shouldn't need to install
+any other gems.
+
+Still, just in case:
+* HTTParty
+* json_pure
+
+
+== Potential Uses
+
+* Deployment notifications
+* CI Build notifications
+* Git hooks
+* Cron jobs
+* Annoying your co-workers
+
