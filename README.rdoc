@@ -13,7 +13,7 @@ gem install campfire_notifier
 
 == Settings
 
-In ~/.campfire_settings.yml, put your campfire subdomain, the room id (not the name) to which you want to 
+In ~/.campfire_notifier.yml, put your campfire subdomain, the room id (not the name) to which you want to 
 send a message, and your API token, which you can find on your campfire user
 edit page.
 
