@@ -2,6 +2,10 @@ require 'spec_helper'
 
 describe CampfireNotifier, ".config" do
   before :each do
+    settings = { 'token' => 'token', 'subdomain' => 'example', 'room_id' => 111111 }
+    YAML.stub!(:load_file).
+      with(File.expand_path("~/.campfire_notifier.yml")).
+      and_return(settings)
     @config = CampfireNotifier.config
   end
 
