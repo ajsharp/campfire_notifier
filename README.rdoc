@@ -9,7 +9,7 @@ with low-ish level system tools (i.e. cron).
 
 == Install
 
-gem install campfire_notifier
+gem install campfire-notifier
 
 == Settings
 
