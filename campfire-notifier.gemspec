@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{campfire-notifier}
-  s.version = "0.1.1"
+  s.version = "0.1.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Alex Sharp"]
@@ -29,11 +29,7 @@ Gem::Specification.new do |s|
      "spec/campfire_notifier_spec.rb",
      "spec/fixtures/rooms.json",
      "spec/spec.opts",
-     "spec/spec_helper.rb",
-     "vendor/gems/cache/crack-0.1.4.gem",
-     "vendor/gems/cache/httparty-0.5.0.gem",
-     "vendor/gems/cache/json_pure-1.2.0.gem",
-     "vendor/gems/cache/rspec-1.2.9.gem"
+     "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/ajsharp/campfire_notifier}
   s.rdoc_options = ["--charset=UTF-8"]
