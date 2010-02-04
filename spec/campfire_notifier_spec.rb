@@ -1,29 +1,56 @@
 require 'spec_helper'
 
 describe CampfireNotifier, ".config" do
-  before :each do
-    settings = { 'token' => 'token', 'subdomain' => 'example', 'room_id' => 111111 }
-    YAML.stub!(:load_file).
-      with(File.expand_path("~/.campfire_notifier.yml")).
-      and_return(settings)
-    @config = CampfireNotifier.config
-  end
-
   it "should load some configuration settings" do
-    @config.should be_instance_of Hash
+    CampfireNotifier.config.should be_instance_of Hash
   end
 
-  it "should set the subdomain option" do
-    @config['subdomain'].should_not be_blank
+  it "should accept a string filename from which to load config options" do
+    YAML.should_receive(:load_file).with(File.expand_path("filename.yml")).and_return(mock_settings)
+    CampfireNotifier.config("filename.yml")
   end
 
-  it "should set the room name" do
-    @config['room_id'].should_not be_blank
+  it "should accept an optional hash of config paramters" do
+    lambda { 
+      CampfireNotifier.config({})
+    }.should_not raise_error(ArgumentError)
   end
 
-  it "should set the token" do
-    @config['token'].should_not be_blank
+  context "when passing in a hash of options" do
+    it "should allow a hash to be passed in" do
+      CampfireNotifier.config({'room_id' => 1})['room_id'].should == 1
+    end
+
+    it "should not try to load a file if hash passed in" do
+      YAML.should_not_receive(:load_file)
+      CampfireNotifier.config({})
+    end
   end
+
+  context "when loading config options from a file" do
+    before :each do
+      YAML.stub(:load_file).with(File.expand_path("~/.campfire_notifier.yml")).and_return(mock_settings)
+      CampfireNotifier.config("~/.campfire_notifier.yml")
+    end
+
+    it "should attempt to load the ~/.campfire_notifier.yml by default" do
+      YAML.should_receive(:load_file).with(File.expand_path("~/.campfire_notifier.yml"))
+      CampfireNotifier.config("~/.campfire_notifier.yml")
+    end
+
+    it "should set the subdomain option" do
+      CampfireNotifier.config['subdomain'].should_not be_blank
+    end
+
+    it "should set the room name" do
+      CampfireNotifier.config['room_id'].should_not be_blank
+    end
+
+    it "should set the token" do
+      CampfireNotifier.config['token'].should_not be_blank
+    end
+  end
+
 end
 
 describe CampfireNotifier, ".speak" do
@@ -35,3 +62,4 @@ describe CampfireNotifier, ".speak" do
     CampfireNotifier.should respond_to :speak
   end
 end
+
