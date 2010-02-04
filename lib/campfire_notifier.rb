@@ -10,8 +10,10 @@ class CampfireNotifier
   headers     'Content-type' => 'application/json'
   format      :json
 
-  def self.config
-    @config ||= YAML.load_file(File.expand_path("~/.campfire_notifier.yml"))
+  class << self
+    def method_missing(command, *args)
+      CampfireNotifier.new.send(command, *args)
+    end
   end
 
   # Accepts either a string filename, a hash of options, or defaults to trying
